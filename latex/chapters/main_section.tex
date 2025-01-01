@@ -1,0 +1,96 @@
+
+\chapter{Kernprinzipien und Anwendungen (Hauptteil)}
+
+Dies ist der Hauptteil der Arbeit
+
+\section{Aufgabe: Literaturverzeichnis}
+Damit im Literaturverzeichnis Einträge angezeigt werden können müssen diese dafür in dem Dokument erwähnt werden.
+\\
+Laut Aufgabe soll ein Paper\cite{Shute.2024}, eine Statistik\cite{Statista.08.10.2024} und eine Norm\cite{DIN-EN-ISO-9241-11.} eingebunden werden.
+
+
+\section{Bilder, Tabellen \& Formeln}
+\label{sect:bilder}
+
+\begin{figure}[htbp]
+	\centering
+	\includesvg[width=7cm]{images/Schleswig-Holstein.svg}
+	\caption{Das Logo des Landes Schleswig-Holstein}
+	\label{fig:land-sh}
+\end{figure}
+
+\vfill
+
+\begin{table}[htbp]
+	\centering
+	\caption{Physikalische Größen}
+	\begin{tabular}{lc}
+		\toprule
+		Physikalische Größe & SI-Einheit \\
+		\midrule
+		Drehmoment & $Nm$ \\
+		Leistung & Watt \\
+		Fläche & $m^2$ \\
+		Spannung/Druck & Pascal \\
+		Ruck & $\frac{m}{s^3}$ \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:physikalische_größen}
+\end{table}
+
+
+\begin{gleichung}[b]
+	\centering
+	\begin{equation}
+		E = mc^2
+	\label{eq:emc2}
+	\end{equation}
+	\caption{Die Formel der Energie-Masse-Äquivalenz}
+\end{gleichung}
+
+\newpage
+
+\begin{itemize}
+	\item Hier soll zum einen auf die Grafik \cref{fig:land-sh} verlinkt werden.
+	\item Zum anderen auf eine Tabelle: \cref{tab:physikalische_größen}
+	\item Und des weiteren auf eine Formel: \cref{eq:emc2}
+\end{itemize}
+
+
+
+\chapter{Den Roten Faden nicht aus den Augen verlieren}
+\label{chapt:roterFaden}
+
+Wichtig ist es bei all den Grafiken, Tabellen und Gleichungen aus dem Kapitel \ref{sect:bilder} nicht den Überblick und noch viel wichtiger den Roten Faden zu verlieren. Deshalb wird hier nun noch einmal hervorgehoben was das Land SH mit Physikalischen Größen und mit Albert Einstein zu tun hat. 
+
+
+\chapter{Dennoch zum Ende kommen}
+\label{chap:zumEndeKommen}
+
+Wie das vorherige Kapitel \ref{chapt:roterFaden} gezeigt hat, ist die Fähigkeit, den Roten Faden nicht zu verlieren, essentiell für das Verständnis der Verbindung zwischen scheinbar unzusammenhängenden Elementen - wie dem Land Schleswig-Holstein, physikalischen Größen und Albert Einstein. 
+
+
+Jetzt, da diese Verbindungen klar aufgezeigt und diskutiert wurden ist an der Zeit, die gewonnenen Erkenntnisse zusammenzutragen.
+
+
+\chapter{Ergebnisse}
+\label{chap:ergebnisse}
+
+Ergebnisse gibt es viele. Doch am wichtigsten sind die Erkenntnisse aus \ref{sect:bilder}. 
+
+Und, dass in \LaTeX{} mittels:
+
+\begin{verbatim}
+	\chapter{Wichtiges Kapitel}
+	\label{chap:wichtiges_kap}
+	
+	dann mit:
+	\ref{chap:wichtiges_kap}
+\end{verbatim}
+
+verlinkt werden kann.
+
+\section{Größe des PDFs}
+
+Das PDF ist derzeit \textbf{244 KB} groß und damit klein genug um per Email versendet zu werden.
+
