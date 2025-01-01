@@ -1,0 +1,162 @@
+% tell Tex Studio to compile with --shell-escape to visualize SVGs
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
+\pdfsuppresswarningpagegroup=1
+
+%\documentclass[11pt, a4paper, twoside=true, ngerman, parskip=full, listof=totoc,footsepline]{scrartcl} 
+\documentclass[
+11pt, 
+a4paper, 
+twoside=true, 
+ngerman, 
+parskip=full, 
+listof=totoc, 
+numbers=noenddot,
+toc = bibnumbered	
+]{scrreprt} 
+% geschwungene Klammer Pflicht
+% eckige Klammer optionaler Parameter
+% article book report letter
+% scrartcl scrreprt scrbook scrlettr2
+
+% listof totoc alle Verzeichnisse werden ins Inhaltsverzeichnis aufgenommen
+
+% standardpakete die immer sinnvoll sind
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+% Schriftart wechseln
+% LateX font catalogue
+% use arial like clon
+%\usepackage{arev}
+%\usepackage[T1]{fontenc}
+
+% Benutzen für Einheiten
+\usepackage{siunitx}
+\sisetup{locale=DE, per-mode=fraction, separate-uncertainty}
+
+\usepackage{graphicx,amsmath,amssymb,amsfonts}
+
+% nutze verbesserte schriftart von lateX
+\usepackage{microtype}
+
+% blindtext
+\usepackage{blindtext}
+
+% svg graphics
+\usepackage[inkscapearea=page]{svg}
+
+% microtype verbessert den Blocksatz
+\usepackage{microtype}
+
+
+% Ränder konfigurieren
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2.5cm]{geometry}
+
+% empty = keine Seitenzahl kein nichts
+\pagestyle{empty}
+
+% plain = nur seitenzahl
+\pagestyle{plain}
+
+\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings}
+
+\newcommand{\lka}{Landeskriminalamt SH}
+
+% command für Vergleiche.
+\newcommand{\vgl}[2]{\autocite[Vgl.][S.~2]{#1}}
+% Nutzung \vgl{Literatur-ID}{Seitenangabe}
+
+% command to bold and kursive
+\newcommand{\boldIt}[1]{\textbf{\textit{#1}}}
+
+% eine neue Environment erstellen
+\newenvironment{beispiel}{\begin{center}\itshape\bfseries}{\end{center}}
+
+%\automark{chapter}
+\ihead[]{\headmark}
+\chead[]{Benjamin Puhani}
+\ohead[\today]{\today}
+\cfoot[\lka]{\lka}
+\ofoot[\pagemark]{\pagemark}
+
+
+% Zeilenabstand ändern
+%\usepackage[doublespacing]{setspace}
+\usepackage[onehalfspacing]{setspace}
+
+\doublespacing
+\onehalfspacing
+
+
+% Erstelle ein neues Inhaltsverzeichnis für Gleichungen
+\DeclareNewTOC[type=equation,types=equations,listname={Gleichungsverzeichnis}]{equ}
+
+% Erstelle Befehl um eine Neue Equation dem Verzeichnis hinzuzufügen
+\newcommand{\myequations}[1]{\addcontentsline{equ}{equation}{\protect\numberline{\theequation}~~#1}}
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[fileext=loa, name=Gleichung]{gleichung}
+
+% Erstelle einen Math operator
+\DeclareMathOperator{\sincos}{}
+
+% Tabellen mit booktabs
+% \toprule
+% \midrule
+% \bottomrule
+\usepackage{booktabs}
+
+% verwendet für die zitation
+\usepackage[backend=biber,style=ieee,bibwarn=true,bibencoding=utf8]{biblatex}
+% bibdatei hinzufügen
+\addbibresource{bibliography/literature.bib}
+
+% package to create acronyms
+\usepackage[nomain, acronym, toc, nonumberlist, nopostdot]{glossaries}
+
+%\usepackage{pgfplot}
+
+% muss als vorletztes Paket geladen werden
+\usepackage[]{hyperref}
+
+% Paket für Referencen
+% muss letzter Import eines Paketes sein.
+% Erkennt was es ist und ist besser als normales LateX
+\usepackage[noabbrev]{cleveref}
+
+% Auskommentieren mit Strg + T
+
+% include acronyms
+\input{preamble/acronyms}
+
+
+\makeglossaries
+
+\begin{document}
+	
+	\input{preamble/title-page}
+	
+	\input{preamble/abstract}
+	
+	\pagenumbering{Roman}
+	\cleardoublepage % Stellt sicher, dass das TOC auf einer neuen Seite beginnt
+	\phantomsection
+	\hypertarget{toc}{}
+	\tableofcontents
+	\listoffigures
+	\listoftables
+	\printglossary[type=\acronymtype, title=Abkürzungsverzeichnis, toctitle=Abkürzungsverzeichnis]
+	
+	
+	\include{chapters/introduction}
+	\include{chapters/main_section}
+	\include{chapters/conclusion}
+	
+	
+	\printbibliography[heading=bibintoc]
+	\appendix\pagenumbering{roman}
+	
+	
+\end{document}
