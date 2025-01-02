@@ -9,7 +9,7 @@
 11pt, 
 a4paper,
 twoside=false,
-headings=small, 
+headings=normal, 
 ngerman, 
 parskip=full, 
 listof=totoc, 
@@ -79,6 +79,7 @@ columnsep=20pt, % Space between text columns (in twocolumn mode)
 \usepackage{multicol} % used for making multiple columns
 
 \newcommand{\me}{Benjamin Puhani}
+\newcommand{\mytitle}{Optimierung der Klassifizierung von Pistazienarten durch Hyperparameter-Anpassungen in K-NN und SVM}
 
 % command für Vergleiche.
 \newcommand{\vgl}[2]{\autocite[Vgl.][S.~2]{#1}}
@@ -94,14 +95,13 @@ columnsep=20pt, % Space between text columns (in twocolumn mode)
 \ihead[]{\headmark}
 \chead[]{\me}
 \ohead[\today]{\today}
-\cfoot[Maschinelles Lernen]{Maschinelles Lernen}
+\cfoot[Hausarbeit Maschinelles Lernen]{Hausarbeit Maschinelles Lernen}
 \ofoot[\pagemark]{\pagemark}
 
 
 % Zeilenabstand ändern
-\usepackage[onehalfspacing]{setspace}
-
-\onehalfspacing
+%\usepackage[onehalfspacing]{setspace}
+%\onehalfspacing
 
 % Erstelle Befehl um eine Neue Equation dem Verzeichnis hinzuzufügen
 \newcommand{\myequations}[1]{\addcontentsline{equ}{equation}{\protect\numberline{\theequation}~~#1}}
