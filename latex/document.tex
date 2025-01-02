@@ -7,14 +7,14 @@
 %\documentclass[11pt, a4paper, twoside=true, ngerman, parskip=full, listof=totoc,footsepline]{scrartcl} 
 \documentclass[
 11pt, 
-a4paper, 
-twoside=true,
-twocolumn, 
+a4paper,
+twoside=false,
+headings=normal, 
 ngerman, 
 parskip=full, 
 listof=totoc, 
 numbers=noenddot,
-toc = bibnumbered
+toc = bibnumbered	
 ]{scrartcl} 
 
 % geschwungene Klammer Pflicht
@@ -28,6 +28,7 @@ toc = bibnumbered
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{csquotes}
+\usepackage{abstract}
 % Schriftart wechseln
 % LateX font catalogue
 % use arial like clon
@@ -43,6 +44,8 @@ toc = bibnumbered
 % nutze verbesserte schriftart von lateX
 \usepackage{microtype}
 
+\usepackage{todonotes}
+
 % blindtext
 \usepackage{blindtext}
 
@@ -54,7 +57,16 @@ toc = bibnumbered
 
 
 % Ränder konfigurieren
-\usepackage[left=3cm,right=3cm,top=2cm,bottom=2.5cm]{geometry}
+\usepackage[
+top=2.5cm, % Top margin
+bottom=2.5cm, % Bottom margin
+left=2cm, % Left margin
+right=2cm, % Right margin
+footskip=1cm, % Space from the bottom margin to the baseline of the footer
+headsep=0.75cm, % Space from the top margin to the baseline of the header
+columnsep=20pt, % Space between text columns (in twocolumn mode)
+%showframe % Uncomment to show frames around the margins for debugging purposes
+]{geometry}
 
 % empty = keine Seitenzahl kein nichts
 \pagestyle{empty}
@@ -64,8 +76,9 @@ toc = bibnumbered
 
 \usepackage{scrlayer-scrpage}
 \pagestyle{scrheadings}
+\usepackage{multicol} % used for making multiple columns
 
-\newcommand{\lka}{Landeskriminalamt SH}
+\newcommand{\me}{Benjamin Puhani}
 
 % command für Vergleiche.
 \newcommand{\vgl}[2]{\autocite[Vgl.][S.~2]{#1}}
@@ -79,22 +92,16 @@ toc = bibnumbered
 
 %\automark{chapter}
 \ihead[]{\headmark}
-\chead[]{Benjamin Puhani}
+\chead[]{\me}
 \ohead[\today]{\today}
-\cfoot[\lka]{\lka}
+\cfoot[Maschinelles Lernen]{Maschinelles Lernen}
 \ofoot[\pagemark]{\pagemark}
 
 
 % Zeilenabstand ändern
-%\usepackage[doublespacing]{setspace}
 \usepackage[onehalfspacing]{setspace}
 
-\doublespacing
 \onehalfspacing
-
-
-% Erstelle ein neues Inhaltsverzeichnis für Gleichungen
-\DeclareNewTOC[type=equation,types=equations,listname={Gleichungsverzeichnis}]{equ}
 
 % Erstelle Befehl um eine Neue Equation dem Verzeichnis hinzuzufügen
 \newcommand{\myequations}[1]{\addcontentsline{equ}{equation}{\protect\numberline{\theequation}~~#1}}
@@ -128,28 +135,21 @@ toc = bibnumbered
 
 % Auskommentieren mit Strg + T
 
-
 \begin{document}
-	
+
 	\input{preamble/title_page}
+	\input{preamble/eigenständigkeits_erklärung}\pagenumbering{Roman}
+	\input{preamble/ki_erklärung}
+	\newpage
+	\input{preamble/abstract}\pagenumbering{arabic}
 	
-	\input{preamble/abstract}
-	
-	\pagenumbering{Roman}
-	\cleardoublepage % Stellt sicher, dass das TOC auf einer neuen Seite beginnt
-	\phantomsection
-	\hypertarget{toc}{}
-	\tableofcontents
-	\listoffigures
-	\listoftables
-	
-	\include{chapters/introduction}
-	\include{chapters/main_section}
-	\include{chapters/conclusion}
-	
-	
-	\printbibliography[heading=bibintoc]
-	\appendix\pagenumbering{roman}
-	
-	
+	\begin{multicols}{2}
+		\input{sections/introduction}
+		\input{sections/main_section}
+		\input{sections/conclusion}
+		
+		
+		\printbibliography[heading=bibintoc]
+	\end{multicols}
+	\listoftodos[Notes] % todo remove!!
 \end{document}
