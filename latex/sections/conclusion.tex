@@ -1,3 +1,11 @@
 \section{Diskussion}
 
-- Diskussion der Ergebnisse inkl. eines Vergleichs der Methoden
+Basierend auf den dargelegten Untersuchungen und Ergebnissen dieser Arbeit lassen sich wesentliche Schlussfolgerungen bezüglich der Anwendung und Optimierung von k-NN und SVM für die Klassifikation von Pistazienarten ziehen. Unter anderem der direkte Vergleich hat gezeigt, dass die Normalisierung der Merkmale eine signifikante Verbesserung der Klassifikationsgenauigkeit beim k-NN-Algorithmus ermöglicht, hier konnte eine Genauigkeitssteigerung von über 10 \% erreicht werden. Es kann vermutet werden, dass die Normalisierung auch für die SVM von Vorteil war. Durch die Optimierung der Hyperparameter konnte für k-NN eine höchste Genauigkeit von 89,64\% und ein F1-Score von 0,90 erreicht werden, was durch eine Kombination von sechs Merkmalen und einem optimalen \glqq{}k\grqq{}-Wert von 39 ermöglicht wurde.
+
+Die systematische Hyperparameter-Optimierung mittels \glqq{}GridSearch\grqq{} für SVM zeigte ebenfalls erfolgversprechende Ergebnisse, wobei die optimale Konfiguration mit C=10, Gamma=1 und dem Kernel-Typ \glqq{}rbf\grqq{} sich als effektiv erwies. 
+
+Im Gegensatz zu der k-NN Klassifizierung erzielte es leicht schlechtere Ergebnisse mit einer Test Genauigkeit von 87,73 \% und F1-Score von 0.88.
+Diese Ergebnisse belegen, dass beide Algorithmen, k-NN und SVM, effiziente Werkzeuge für die Klassifizierung von Pistaziensorten darstellen können, wobei die Leistung signifikant von der korrekten Auswahl und Einstellung der Hyperparameter abhängt.
+
+\subsection{Ausblick}
+Ein weiteres wichtiges Thema, das in dieser Arbeit noch unzureichend behandelt wurde, ist die Überprüfung und Behandlung von Overfitting\footnote{Overfitting beschreibt das Phänomen, wenn ein Modell die Trainingsdaten „zu gut“ lernt und dabei seine Fähigkeit zur Generalisierung auf neue, unbekannte Daten verliert.}.  Sowohl für k-NN als auch für SVM wurden zwar Ansätze zur Hyperparameter-Optimierung umgesetzt, um die Modellleistung zu maximieren, die spezifische Untersuchung auf Overfitting und entsprechende Gegenmaßnahmen stehen jedoch noch aus. Die Auswirkungen von Overfitting zu verstehen und entsprechende Techniken zur Vermeidung einzubetten, ist entscheidend für das Erreichen einer hohen Generalisierbarkeit der Modelle. Zukünftige Arbeiten könnten sich darauf konzentrieren, Validierungstechniken wie Kreuzvalidierung einzuführen, um sicherzustellen, dass die Modelle auch auf nicht gesehenen Daten robuste Vorhersagen treffen können.

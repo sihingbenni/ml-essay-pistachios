@@ -29,6 +29,7 @@ toc = bibnumbered
 \usepackage[ngerman]{babel}
 \usepackage{csquotes}
 \usepackage{abstract}
+\usepackage{caption}
 % Schriftart wechseln
 % LateX font catalogue
 % use arial like clon
@@ -55,16 +56,15 @@ toc = bibnumbered
 % microtype verbessert den Blocksatz
 \usepackage{microtype}
 
-
 % Ränder konfigurieren
 \usepackage[
-top=2.5cm, % Top margin
-bottom=2.5cm, % Bottom margin
-left=2cm, % Left margin
-right=2cm, % Right margin
+top=2cm, % Top margin
+bottom=2cm, % Bottom margin
+left=1.25cm, % Left margin
+right=1.25cm, % Right margin
 footskip=1cm, % Space from the bottom margin to the baseline of the footer
 headsep=0.75cm, % Space from the top margin to the baseline of the header
-columnsep=20pt, % Space between text columns (in twocolumn mode)
+columnsep=10pt, % Space between text columns (in twocolumn mode)
 %showframe % Uncomment to show frames around the margins for debugging purposes
 ]{geometry}
 
@@ -73,6 +73,8 @@ columnsep=20pt, % Space between text columns (in twocolumn mode)
 
 % plain = nur seitenzahl
 \pagestyle{plain}
+
+\usepackage{enumitem}
 
 \usepackage{scrlayer-scrpage}
 \pagestyle{scrheadings}
@@ -147,9 +149,7 @@ columnsep=20pt, % Space between text columns (in twocolumn mode)
 		\input{sections/introduction}
 		\input{sections/main_section}
 		\input{sections/conclusion}
-		
-		
-		\printbibliography[heading=bibintoc]
-	\end{multicols}
-	\listoftodos[Notes] % todo remove!!
+		\printbibliography
+		\newpage
+		\end{multicols}
 \end{document}

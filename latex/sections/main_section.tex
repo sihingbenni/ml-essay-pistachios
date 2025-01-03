@@ -1,14 +1,14 @@
-\section{Methoden und Daten}
+\section{Daten und Methoden}
 
-In dieser Untersuchung wird ein Datensatz verwendet, der im Rahmen der Publikation "Progress of Nutrition Vol. 23 No. 2 (2021)" veröffentlicht und in der Studie "Classification of Pistachio Species Using Improved k-NN Classifier"\cite{Ozkan.2021} vorgestellt wurde. Der Datensatz ist öffentlich zugänglich und speziell für die Klassifikation zweier Pistazienarten (\glqq{}Kirmizi\grqq{} und \glqq{}Siirt\grqq{}) erstellt worden. Für diese Studie wurden 2148 hochauflösende Bilder von diesen zwei Pistazienarten aufgenommen. Anhand dieser Aufnahmen konnten die Merkmale gemessen werden.
+In dieser Arbeit wird ein Datensatz verwendet, der im Rahmen der Publikation "Progress of Nutrition Vol. 23 No. 2 (2021)" veröffentlicht und in der Studie "Classification of Pistachio Species Using Improved k-NN Classifier"\cite{Ozkan.2021} vorgestellt wurde. Der Datensatz ist öffentlich zugänglich und speziell für die Klassifikation zweier Pistazienarten (\glqq{}Kirmizi\grqq{} und \glqq{}Siirt\grqq{}) erstellt worden. Für diese Studie wurden 2148 hochauflösende Bilder von diesen zwei Pistazienarten aufgenommen. Anhand dieser Aufnahmen konnten die Merkmale gemessen werden.
 
-\section*{Explorative Datenanalyse} 
-Der Datensatz beinhaltet zwei Versionen mit einem unterschiedlichen Umfang an Merkmalen: eine Version umfasst 16 Features, während die andere Version 28 Features bietet. Für die Zwecke dieses Projekts wird die Version mit 16 Features verwendet. Die Auswahl dieser Version erfolgte aufgrund der Tatsache, dass die zusätzlichen 12 Features Farbmerkmale der Pistazien darstellen, welche in dieser spezifischen Untersuchung nicht berücksichtigt werden.
+\subsection{Explorative Datenanalyse} 
+Der Datensatz beinhaltet zwei Versionen mit einem unterschiedlichen Umfang an Merkmalen: eine Version umfasst 16 Features, während die andere Version 28 Features bietet. Für die Zwecke dieses Projekts wird die Version mit 16 Features verwendet. Die Auswahl dieser Version erfolgte aufgrund der Tatsache, dass die zusätzlichen 12 Features Farbmerkmale der Pistazien darstellen, welche in dieser spezifischen Arbeit nicht berücksichtigt werden.
 
 Die für dieses Projekt verwendeten Merkmale lassen sich in die folgenden Kategorien unterteilen:
 
-\subsection*{Morphologische Merkmale (12 Features):}
-\begin{itemize}
+\textbf{Morphologische Merkmale (12 Features):}
+\begin{itemize}[itemsep=0pt, parsep=0pt]
 	\item Fläche (Area)
 	\item Umfang (Perimeter)
 	\item Hauptachse (Major\_Axis)
@@ -23,8 +23,8 @@ Die für dieses Projekt verwendeten Merkmale lassen sich in die folgenden Katego
 	\item Kompaktheit (Compactness)
 \end{itemize}
 
-\subsection*{Formmerkmale (4 Features):}
-\begin{itemize}
+\textbf{Formmerkmale (4 Features):}
+\begin{itemize}[itemsep=0pt, parsep=0pt]
 	\item Formfaktor 1 (Shapefactor\_1)
 	\item Formfaktor 2 (Shapefactor\_2)
 	\item Formfaktor 3 (Shapefactor\_3)
@@ -34,26 +34,225 @@ Die für dieses Projekt verwendeten Merkmale lassen sich in die folgenden Katego
 Die vier Formmerkmale sind weitere mathematische Zusammenfassungen zwischen einzelnen morphologischen Merkmalen.
 Was sich genau hinter den Bezeichnungen versteckt lässt sich unter \parencite[4]{Ozkan.2021} in Tabelle 1 nachlesen.
 
-Eine genauere Betrachtung könnte helfen um Abhängigkeiten zwischen den Merkmalen zu erkennen und später Merkmale nicht zu vergleichen, die nicht direkt Abhängig zu einander sind.
+%\textbf{Korrelation zwischen Merkmalen}\\
+%Wie zu erwarten besteht zwischen mehreren Merkmalen eine hohe Abhängigkeit.
+%Beispielsweise ist die Fläche sehr stark abhängig von der Haupt- und Nebenachse einer Pistazie.
+%Visualisieren lässt sich das ganze mittels einer Korrelationsmatrix.
+%
+%\noindent\hspace*{-0.3cm}% Negative horizontale Verschiebung
+%\includegraphics[width=1.1\linewidth]{images/korrelationsmatrix_aller_attribute}
+%\captionof{figure}{Korrelationsmatrix der Pistazienmerkmale.}
+%\label{fig:korrelation_of_attributes}
+%
+%
+%Die Korrelationsmatrix in \autoref{fig:korrelation_of_attributes} bestätigt nicht nur die vermuteten Abhängigkeiten, wie der Fläche und den Achsen, sonder zeigt im Besonderen deutliche negative Korrelationen zwischen verschiedenen Formmerkmalen und den morphologischen Eigenschaften auf.
 
-- kurze explorative Datenanalyse mit Visualisierung des Datensatzes
-- Aufbereitung der Daten (ggf. Skalierung, Entfernung von fehlerhaften Daten etc.)
-- Aufteilung der Daten in Trainings- und Testdaten
-- Pro Klassifikationsmethode ist je mindestens einen Parameter variieren
-	Wahl des jeweiligen Parameters begründen
-	Einfluss des Parameters auf die Performanz der Methode visualisieren
-	Gute Parametereinstellungen begründet wählen
-	
+\textbf{Verteilung der Klassen}\\
+Zum trainieren eines Klassifizierung Modells ist es wichtig, dass Klassen in den Trainingsdaten ausgewogen verteilt sind, da ansonsten Vorhersagemodelle dazu neigen können, die Klasse mit der höchsten Anzahl von Beobachtungen hervorzusagen ungeachtet der tatsächlichen Klasse \cite{ZoumanaKeita.2024}.
 
+In dem vorliegenden Datensatz ist die Klasse der Kirmizi-Pistazien mit 1232 Einträgen, gegenüber den Siit-Pistazien mit 916 Einträgen deutlich überrepräsentiert, wie in \autoref{fig:distribution_of_classes} dargestellt.
+Dies wird auch in dem \autoref{sec:aufteilung-in-trainings-und-testdaten} bei der Aufteilung in die Trainings- und Testdaten berücksichtigt.
 
-\section{Ergebnisse}
-
-- Bewertung mit der Klassifikationsleistung mit geeigneten Qualitätsmaßen (z.B. Genauigkeit, Recall, Precision oder Sensitivität \& Spezifität)
-- Visualisierung der Ergebnisse
-
-\begin{figure}
+{
 	\centering
-	\includegraphics[width=\columnwidth]{images/korrelationsmatrix_aller_attribute}
-	\caption{}
-	\label{fig:korrelationsmatrixallerattribute}
-\end{figure}
+	\includegraphics[width=1\linewidth]{images/distribution_of_classes}
+	\captionof{figure}{Klassenverteilung innerhalb der 2148 Pistaziendatensätze.}
+	\label{fig:distribution_of_classes}
+}
+
+
+\subsection{Bereinigung des Datensatzes}
+\label{subsec:cleaning-the-data}
+Der Datensatz wurde auf Null Werte und Duplikate überprüft. Es konnten keine gefunden werden.
+Auch wurden die Daten in Bezug auf die einzelnen Zahlenbereiche der Merkmale untersucht. Diese liegen, wie \autoref{tab:deskriptive_statistik} zeigt, teilweise sehr weit auseinander.\\
+
+{	
+	\tiny
+	\centering
+	\begin{tabular}{lrrrr}
+		\toprule
+		{Merkmal} & {Mean} & {Std} & {Min} & {Max} \\
+		\midrule
+		AREA          & 79950.66 & 13121.74 & 29808 & 124008 \\
+		PERIMETER     & 1425.97  & 375.57   & 858   & 2755 \\
+		MAJOR\_AXIS    & 446.25   & 32.45    & 320   & 542 \\
+		MINOR\_AXIS    & 238.31   & 30.31    & 134   & 383 \\
+		ECCENTRICITY  & 0.84     & 0.05     & 0.50  & 0.95 \\
+		EQDIASQ       & 317.92   & 26.91    & 195   & 397 \\
+		SOLIDITY      & 0.94     & 0.05     & 0.59  & 1.00 \\
+		CONVEX\_AREA   & 85015.84 & 13154.92 & 37935 & 132478 \\
+		EXTENT        & 0.72     & 0.05     & 0.43  & 0.82 \\
+		ASPECT\_RATIO  & 1.90     & 0.24     & 1.16  & 3.09 \\
+		ROUNDNESS     & 0.57     & 0.21     & 0.06  & 0.93 \\
+		COMPACTNESS   & 0.71     & 0.04     & 0.48  & 0.88 \\
+		SHAPEFACTOR\_1 & 0.01     & 0.00     & 0.004 & 0.013 \\
+		SHAPEFACTOR\_2 & 0.003    & 0.00034  & 0.002 & 0.005 \\
+		SHAPEFACTOR\_3 & 0.51     & 0.06     & 0.23  & 0.77 \\
+		SHAPEFACTOR\_4 & 0.96     & 0.05     & 0.62  & 1.00 \\
+		\bottomrule
+	\end{tabular}
+	\captionof{table}{Übersicht der deskriptiven Statistik aller Merkmale}
+	\label{tab:deskriptive_statistik}
+}
+
+Insbesondere weisen die erheblichen Unterschiede zwischen den maximalen und minimalen Werten einiger Merkmale, wie beispielhaft bei der konvexen Fläche (maximaler Wert: 132478) im Vergleich zum Formfaktor 2 (minimaler Wert: 0.002) dargestellt, auf eine breite Streuung innerhalb der Daten hin. Diese ausgeprägte Varianz in den Datengrößenordnungen kann beim k-NN Verfahren zu Herausforderungen führen, da k-NN auf Distanzmessungen basiert und somit ungleich gewichtete Merkmale zu verzerrten Ergebnissen führen können \cite{Lang.2023}. Die unterschiedlichen Größenordnungen bedeuten, dass Merkmale mit größeren numerischen Werten einen unverhältnismäßig hohen Einfluss auf die Distanzberechnung haben, was die Leistungsfähigkeit des Klassifikators beeinträchtigt.
+Diese Beobachtung wird im \autoref{subsec:importance-of-normalizing} anhand eines direkten Vergleichs auf die Probe gestellt.
+
+\textbf{Skalierung und Normalisierung}\\
+Mittels Min-Max-Normalisierung wurden die Daten auf einen Bereich von [0,1] gebracht.
+Durch die Anpassung aller Merkmale auf dieselbe Skala wird gewährleistet, dass jedes Attribut gleichberechtigt in die Berechnung der Distanzen eingeht.
+Eine Übersicht der normalisierten Werte wird in \autoref{tab:normalisierte_deskriptive_statistik} dargestellt.\\
+
+%#### Datenbereinigung
+%1. Überprüfung auf und entfernen von Null-Werten
+%2. Überprüfung auf und entfernen von Duplikaten
+%3. Überprüfung der Zahlenbereiche
+%4. Überprüfung der Größenverhältnisse der Klassen
+
+{
+	\tiny
+	\centering
+	\begin{tabular}{lrrrr}
+		\toprule
+		{Merkmal}        & {Mean}    & {Std}     & {Min} & {Max} \\
+		\midrule
+		AREA           & 0.5323  & 0.139297 & 0.0 & 1.0 \\
+		PERIMETER      & 0.299263 & 0.198011 & 0.0 & 1.0 \\
+		MAJOR\_AXIS     & 0.568106 & 0.146400 & 0.0 & 1.0 \\
+		MINOR\_AXIS     & 0.419988 & 0.121468 & 0.0 & 1.0 \\
+		ECCENTRICITY   & 0.760188 & 0.110539 & 0.0 & 1.0 \\
+		EQDIASQ        & 0.607799 & 0.132855 & 0.0 & 1.0 \\
+		SOLIDITY       & 0.864880 & 0.123931 & 0.0 & 1.0 \\
+		CONVEX\_AREA    & 0.497983 & 0.139142 & 0.0 & 1.0 \\
+		EXTENT         & 0.734656 & 0.133602 & 0.0 & 1.0 \\
+		ASPECT\_RATIO   & 0.383777 & 0.124579 & 0.0 & 1.0 \\
+		ROUNDNESS      & 0.581502 & 0.244327 & 0.0 & 1.0 \\
+		COMPACTNESS    & 0.589890 & 0.110841 & 0.0 & 1.0 \\
+		SHAPEFACTOR\_1  & 0.186951 & 0.089808 & 0.0 & 1.0 \\
+		SHAPEFACTOR\_2  & 0.212820 & 0.117162 & 0.0 & 1.0 \\
+		SHAPEFACTOR\_3  & 0.521804 & 0.117540 & 0.0 & 1.0 \\
+		SHAPEFACTOR\_4  & 0.884413 & 0.136927 & 0.0 & 1.0 \\
+		\bottomrule
+	\end{tabular}
+	\captionof{table}{Übersicht der normalisierten deskriptiven Statistik aller Merkmale}
+	\label{tab:normalisierte_deskriptive_statistik}
+}
+
+\subsection{Aufteilung in Trainings- und Testdaten}
+\label{sec:aufteilung-in-trainings-und-testdaten}
+
+ Um sicherzustellen, dass das Modell gut generalisiert und nicht nur auf den ihm zur Trainingszeit präsentierten Daten funktioniert, wird für den Datensatz eine ausgewogene Datenaufteilung vorgenommen. Zunächst wird die Anzahl der Datensätze beider Klassen durch \grqq{}Resampling\glqq{} angeglichen, um einen ausgeglichenen Datensatz zu erhalten, der keine Verzerrung zugunsten einer Klasse aufweist. Anschließend werden die Daten in Features (die 16 Merkmale) und Labels (die Klasse der Pistazie) aufgeteilt. Der nächste Schritt teilt diese Daten in ein Trainingsset (80 \% der Daten) und ein Testset (20 \% der Daten). Hierbei wird sichergestellt, dass das Verhältnis der Klassen im Trainings- und im Testset dem des gesamten Datensatzes entspricht, was zur Validität des Lernverfahrens beiträgt. Mit dieser Methode wird sichergestellt, dass das jeweilige Modell auf einer soliden und repräsentativen Datenbasis trainiert und evaluiert wird.
+
+\subsection{Methoden}
+
+Für die Klassifikation zweier Pistazienarten auf Grundlage von 16 Merkmalen wurde sich für k-NN und SVM entschieden, wofür es mehrere Gründe gibt.
+
+Zunächst bietet k-NN den Vorteil der Einfachheit und Anschaulichkeit. 
+Er ist intuitiv nachvollziehbar und ermöglicht damit ein leichtes Verständnis der dahinterliegenden Mechanismen.
+Die Effektivität von k-NN in Anwendungsszenarien, bei denen die Beziehungen zwischen Datenpunkten räumlich interpretierbar sind, macht ihn für das Klassifikationsproblem der Pistazienarten besonders geeignet.
+Ein Nachteil dieses Verfahrens ist, dass es am \glqq{}Fluch der Dimensionalität\grqq{} leidet, dies bedeutet, dass je mehr Merkmale in einem Datenraum miteinander verglichen werden, desto mehr leidet die Modellgenauigkeit und -effizienz \cite{Lang.2023b}.
+
+SVM sind hingegen darauf ausgelegt mit hohen Dimensionen umzugehen, indem eine Hyper-Ebene in einem hochdimensionalen Raum konstruiert wird\cite{Cortes.1995}. Dies macht SVM im Gegensatz zu k-NN extrem leistungsfähig, wenn es um einen Datensatz mit einer großen Anzahl an Merkmalen geht.
+
+Durch die Benutzung von k-NN und SVM lassen sich die Stärken beider Algorithmen nutzen.\\
+
+\textbf{K-NN}\\
+Um ein besseres Verständnis über die Wichtigkeit der Skalierung zu gewinnen wurde, wie bereits in \autoref{subsec:cleaning-the-data} angedeutet, der Algorithmus mehrmals normalisiert und nicht normalisiert auf den Datensatz angewandt.
+Weiterhin wurde, zur Verbesserung des k-NN Verfahrens, zum einen der Hyperparameter \glqq{}k\grqq{} kontinuierlich verändert.
+Sowie aufgrund des \glqq{}Fluchs der Dimensionalität\grqq{} die Anzahl an Merkmalen auf denen der Algorithmus trainiert und getestet wird angepasst.
+
+\begin{itemize}[itemsep=0pt, parsep=0pt]
+	\item Für jeden Trainingsdurchlauf wurden 100 unterschiedliche \glqq{}k\grqq{} probiert.
+	\item Es wurde jede mögliche Kombination der 16 Merkmale ausprobiert.
+\end{itemize}
+ 
+Wie viele unterschiedliche Kombinationen (ohne Reihenfolge) es gibt lässt sich mit der Binomial Formel in \autoref{fig:sum_binom_kombinations} ausrechnen.
+Diese 65635 multipliziert mit den jeweils 100 k ergibt eine Summe von $6563500$ durchläufen des k-NN Verfahrens.
+Es wurde immer das beste \glqq{}k\grqq{} in einer Tabelle gespeichert. Diese CSV-Datei \glqq{}data/knn\_all\_combinations.csv\grqq{} liegt dieser Arbeit bei.
+\vspace{-10pt}
+$$
+\sum_{i=1}^{16} \binom{16}{i} = 65535
+$$
+\captionof{figure}{Summe aller möglichen Kombinationen von 16 Merkmalen}
+\label{fig:sum_binom_kombinations}
+
+\textbf{SVM}\\
+Die Anpassung der Hyperparameter des SVM-Modells erfolgt mittels \glqq{}GridSearch\grqq{} einer Methode, die systematisch eine Reihe von vordefinierten Hyperparametern ausprobiert, um die beste Kombination für die Modellleistung zu finden.
+In dieser Arbeit wurden der Regulierungsparameter \glqq{}C\grqq{}, der \glqq{}Gamma\grqq{}-Wert und der \glqq{}Kernel\grqq{}-Typ angepasst.
+\autoref{fig:hyperparameter_svn} zeigt die Werte welche für die \glqq{}GridSearch\grqq{} benutzt wurden. 
+
+%\vspace{-10pt} % Verringern des Raums vor der Verbatim-
+\begin{verbatim}
+'C': [0.1, 1, 10, 100],
+'gamma': [1, 0.1, 0.01, 0.001],
+'kernel': ['rbf', 'poly', 
+  'sigmoid', 'linear']
+\end{verbatim}
+%\vspace{-10pt}
+\captionof{figure}{SVM Hyperparameter}
+\label{fig:hyperparameter_svn}
+
+
+\section{Ergebnisse}\label{sec:Ergebnisse}
+Alle Ergebnisse dieser Arbeit stammen aus dem anhängenden Jupyter Notebook \glqq{}ml\_bp\_pistachios.ipynb\grqq{} und können dort im Detail nachvollzogen werden. 
+
+\subsection{Die Wichtigkeit der Normalisierung}
+\label{subsec:importance-of-normalizing}
+
+{
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/knn_all_attributes}
+	\captionof{figure}{Test-Genauigkeit bei 16 Merkmalen mit der Besten bei: 73,56 \%, F1-Score: 0.74 mit k: 9}
+	\label{fig:knnallattributes}
+}
+
+{
+	\centering
+	\includegraphics[width=0.9\linewidth]{images/knn_normalized_all_attributes}
+	\captionof{figure}{Test-Genauigkeit bei 16 normalisierte Merkmalen mit der Besten bei: 86,37 \%, F1-Score: 0.86 mit k: 69}
+	\label{fig:knnnormalizedallattributes}
+}
+
+Dabei zeigt sich in \autoref{fig:knnallattributes} im Vergleich zu \autoref{fig:knnnormalizedallattributes}, dass durch die Normalisierung eine deutliche Verbesserung (mehr als 10 \% Genauigkeit) der Klassifikationsergebnisse erzielt werden kann.
+Alle anschließenden Operationen basieren auf einem normalisierten Datensatz.
+
+\subsection{Parameter Optimierung bei K-NN}
+{
+	\centering
+	\includegraphics[width=1\linewidth]{images/best_knn_of_all_combinations}
+	\captionof{figure}{Auswertung aller Kombinationen der 16 Merkmale}
+	\label{fig:bestknnofallcombinations}
+}
+
+Das k-NN Modell welches am besten Abschnitt erzielte eine Test-Genauigkeit von 89,64 \%, F1-Score von: 0.90, auf Grundlage von: \glqq{}k\grqq{} = 39 mit den Merkmalen:
+\begin{itemize}[itemsep=0pt, parsep=0pt]
+	\item MAJOR\_AXIS
+	\item EQDIASQ
+	\item SOLIDITY
+	\item EXTENT
+	\item COMPACTNESS
+	\item SHAPEFACTOR\_4
+\end{itemize}
+
+\subsection{Parameter Optimierung bei SVM}
+{
+	\centering
+	\includegraphics[width=1\linewidth]{images/svm_gridsearch_rbf}
+	\captionof{figure}{GridSearch SVM Optimierung für rbf mit verschiedenen Hyperparametern}
+	\label{fig:svmgridsearchrbf}
+}
+Die \glqq{}GridSearch\grqq{} liefert eine optimierte SVM mit den folgenden Hyperparameter zurück:
+\begin{verbatim}
+	C: 10; Gamma: 1; Kernel-Type: rbf
+\end{verbatim}
+ Dies geht auch aus \autoref{fig:svmgridsearchrbf} hervor. Für diese Konfiguration konnte ein F1-Score von 0.88 erreicht werden und eine Test-Genauigkeit von 87,73 \%.
+ Die übrigen Heatmaps lieferten schlechtere Ergebnisse und sind hier aus Platzgründen entfernt worden.
+
+
+
+
+
+
+
+
+
